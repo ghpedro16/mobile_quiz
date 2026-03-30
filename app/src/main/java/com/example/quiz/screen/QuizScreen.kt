@@ -22,14 +22,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.R
 import androidx.navigation.NavController
+import com.example.quiz.components.CardPerguntas
 
 @Composable
 fun QuizScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    QuizScreenViewModel: QuizScreenViewModel
 ) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -60,37 +62,6 @@ fun QuizScreen(
                 text = "Pergunta 1 de 3",
                 fontSize = 20.sp
             )
-        }
-
-        Card() {
-            Column() {
-                Text(text = "Qual é a capital da França?")
-
-                Button(
-                    onClick = {}
-                ) {
-                    Text(text = "Londres")
-                }
-
-                Button(
-                    onClick = {}
-                ) {
-                    Text(text = "Berlim")
-                }
-
-                Button(
-                    onClick = {}
-                ) {
-                    Text(text = "Paris")
-                }
-
-                Button(
-                    onClick = {}
-                ) {
-                    Text(text = "Madri")
-                }
-
-            }
         }
 
     }
