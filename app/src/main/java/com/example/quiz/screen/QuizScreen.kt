@@ -16,6 +16,10 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,13 +27,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.quiz.components.CardPerguntas
+import com.example.quiz.components.AlternativaQuestion
 
 @Composable
 fun QuizScreen(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    QuizScreenViewModel: QuizScreenViewModel
+    modifier: Modifier = Modifier
 ) {
 
     Column(
@@ -48,21 +50,64 @@ fun QuizScreen(
             )
         }
 
-        OutlinedButton(
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                Color.Green,
-                contentColor = Color.Black
+        QuestionCard(
+            enunciado = "Qual a capital da França?",
+            alternativas = listOf(
+                "Itapevi",
+                "Paris",
+                "Londres",
+                "Madri"
             ),
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp)
-        ) {
-            Text(
-                text = "Pergunta 1 de 3",
-                fontSize = 20.sp
-            )
-        }
+            alternativaCorreta = "Paris"
+        )
 
     }
 }
+
+@Composable
+fun QuestionCard(
+    enunciado: String,
+    alternativas: List<String>,
+    alternativaCorreta: String
+) {
+
+    var alternativaSelecionada by remember {
+        mutableStateOf("")
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = (enunciado))
+
+            alternativas.forEach {
+                if (alternativaSelecionada != ""){
+                    AlternativaQuestion(
+                        question = it,
+                        alternativaSelecionada = {alternativaSelecionada = it}
+                    )
+                }else{
+                    val corAlternativa = if (alternativaCorreta == it){
+                        Color.Green
+                    }else{
+                        Color.Red
+                    }
+                    AlternativaQuestion(
+                        question = it,
+                        alternativaSelecionada = {alternativaSelecionada = it},
+                        corAlternativa = corAlternativa
+                    )
+                }
+            }
+        }
+    }
+}
+

@@ -26,24 +26,8 @@ class MainActivity : ComponentActivity() {
             QuizTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    val navController = rememberNavController()
+                    QuizScreen(modifier = Modifier.padding(innerPadding))
 
-                    NavHost(
-                        navController = navController,
-                        startDestination = "home",
-
-                    ){
-                        composable (route = "home"){ HomeScreen(
-                            modifier = Modifier.padding(innerPadding),
-                            navController = navController
-                        )}
-
-                        composable (route = "quiz"){ QuizScreen(
-                            modifier = Modifier.padding(innerPadding),
-                            navController = navController
-                        )}
-
-                    }
                 }
             }
         }

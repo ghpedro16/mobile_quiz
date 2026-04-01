@@ -6,18 +6,11 @@ import androidx.lifecycle.ViewModel
 
 class QuizScreenViewModel: ViewModel(){
 
-    private val _pergunta = MutableLiveData<String>()
-    val pergunta: LiveData<String> = _pergunta
+    private val _acertos = MutableLiveData<Int>()
+    val acertos: LiveData<Int> = _acertos
 
-    fun onPerguntaChanged (novaPergunta: String){
-        _pergunta.value = novaPergunta
-    }
+    fun onPerguntaChanged (){
 
-    private val _resposta = MutableLiveData<Int>()
-    val resposta: LiveData<Int> = _resposta
-
-    fun onRespostaChanged (novaResposta: Int){
-        _resposta.value = novaResposta
     }
 
 }
